@@ -28,8 +28,7 @@ async def setup_linkedin_login():
     print("After logging in, the session will be saved for future requests.")
     print()
     
-    # Initialize extractor
-    extractor = LinkedInExtractor()
+    
     
     try:
         # Setup browser for login (temporarily use visible mode)
@@ -82,14 +81,7 @@ async def setup_linkedin_login():
         await extractor.page.goto("https://www.linkedin.com/login")
         
         print("\n" + "=" * 50)
-        print("🔑 MANUAL LOGIN REQUIRED")
-        print("=" * 50)
-        print("1. You should see the LinkedIn login page in the browser")
-        print("2. Enter your LinkedIn email/username and password")
-        print("3. Complete any 2FA if prompted")
-        print("4. Wait for the page to fully load after login")
-        print("5. Press Enter here when you're logged in and ready")
-        print("=" * 50)
+       
         
         # Wait for user to complete login
         input("Press Enter when you're logged in to LinkedIn...")
@@ -165,7 +157,7 @@ async def main():
     print("=" * 30)
     
     # Check if OpenAI is available
-    if not OPENAI_AVAILABLE:
+    if not OPENAII_AVAILABLE:
         print("\n❌ Cannot proceed without proper OpenAI setup.")
         print("Please ensure:")
         print("1. You have set up your .env file with OPENAI_API_KEY")
