@@ -10,22 +10,7 @@ from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
-
-# Only import LinkedInExtractor if OpenAI is available
-try:
-    from linkedin_extractor import LinkedInExtractor
-    OPENAI_AVAILABLE = True
-except Exception as e:
-    print(f"⚠️  Warning: Could not import LinkedInExtractor: {e}")
-    print("This might be due to missing OpenAI API key or compatibility issues.")
-    OPENAI_AVAILABLE = False
-
-async def setup_linkedin_login():
-    """Setup LinkedIn login session"""
-    print("🔐 LinkedIn Login Setup")
-    print("=" * 40)
-    print("This will open a browser window where you can log in to LinkedIn.")
-    print("After logging in, the session will be saved for future requests.")
+er logging in, the session will be saved for future requests.")
     print()
     
     # Initialize extractor
