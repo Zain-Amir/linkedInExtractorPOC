@@ -5,32 +5,7 @@ from linkedin_extractor import LinkedInExtractor
 import os
 from dotenv import load_dotenv
 import asyncio
-from contextlib import asynccontextmanager
-
-# Load environment variables
-load_dotenv()
-
-# Global extractor instance
-extractor = None
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    """Lifespan manager for browser session"""
-    global extractor
-    try:
-        # Startup
-        extractor = LinkedInExtractor()
-        await extractor.setup_browser()
-        print("🚀 Browser session initialized successfully!")
-        yield
-    finally:
-        # Shutdown
-        if extractor:
-            await extractor.close_browser()
-            print("🔒 Browser session closed")
-
-app = FastAPI(
-    title="LinkedIn Extractor POC",
+fromOC",
     description="AI-powered LinkedIn profile data extraction using screenshots",
     version="1.0.0",
     lifespan=lifespan
