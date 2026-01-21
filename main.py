@@ -13,21 +13,7 @@ load_dotenv()
 # Global extractor instance
 extractor = None
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    """Lifespan manager for browser session"""
-    global extractor
-    try:
-        # Startup
-        extractor = LinkedInExtractor()
-        await extractor.setup_browser()
-        print("🚀 Browser session initialized successfully!")
-        yield
-    finally:
-        # Shutdown
-        if extractor:
-            await extractor.close_browser()
-            print("🔒 Browser session closed")
+   print("🔒 Browser session closed")
 
 app = FastAPI(
     title="LinkedIn Extractor POC",
@@ -48,11 +34,7 @@ class LinkedInExtractionResponse(BaseModel):
 @app.get("/")
 async def root():
     return {"message": "LinkedIn Extractor POC - Send a POST request to /extract with a LinkedIn URL"}
-
-@app.post("/extract", response_model=LinkedInExtractionResponse)
-async def extract_linkedin_data(request: LinkedInURLRequest):
-    """
-    Extract data from a LinkedIn URL by taking a screenshot and analyzing it with OpenAI
+ta from a LinkedIn URL by taking a screenshot and analyzing it with OpenAI
     """
     global extractor
     
