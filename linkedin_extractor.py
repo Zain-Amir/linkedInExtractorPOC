@@ -8,29 +8,7 @@ from PIL import Image
 import io
 import openai
 from dotenv import load_dotenv
-import logging
-
-# Load environment variables
-load_dotenv()
-
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-class LinkedInExtractor:
-    def __init__(self):
-        """Initialize the LinkedIn extractor with OpenAI client and browser setup"""
-        # Initialize OpenAI client with error handling
-        api_key = os.getenv("OPENAI_API_KEY")
-        if not api_key:
-            raise ValueError("OPENAI_API_KEY environment variable is not set. Please add it to your .env file.")
-        
-        try:
-            self.openai_client = openai.OpenAI(api_key=api_key)
-        except Exception as e:
-            raise ValueError(f"Failed to initialize OpenAI client: {str(e)}. Please check your API key and try upgrading dependencies with 'pip install -r requirements.txt --upgrade'")
-        
-        # Browser session management
+import ment
         self.playwright = None
         self.browser_context = None
         self.page = None
