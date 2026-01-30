@@ -2,7 +2,6 @@ import asyncio
 import os
 import base64
 import json
-from typing import Dict, Any
 from playwright.async_api import async_playwright
 from PIL import Image
 import io
