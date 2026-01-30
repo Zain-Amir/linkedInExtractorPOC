@@ -47,23 +47,7 @@ class LinkedInExtractor:
                 self.playwright = await async_playwright().start()
                 
                 # Create user data directory for session persistence
-                user_data_dir = os.path.join(os.getcwd(), "browser_data")
-                os.makedirs(user_data_dir, exist_ok=True)
-                
-                # Launch persistent browser context
-                self.browser_context = await self.playwright.chromium.launch_persistent_context(
-                    user_data_dir=user_data_dir,
-                    headless=True,  # Run in headless mode for production
-                    args=[
-                        "--no-sandbox",
-                        "--disable-dev-shm-usage",
-                        "--disable-gpu",
-                        "--window-size=1920,1080"
-                    ]
-                )
-                
-                # Get the first page or create a new one
-                pages = self.browser_context.pages
+                user_data_dir = os.path.join(os.getcwd(), "browser
                 if pages:
                     self.page = pages[0]
                 else:
@@ -88,23 +72,6 @@ class LinkedInExtractor:
             logger.info(f"Navigating to: {url}")
             await self.page.goto(url, wait_until="domcontentloaded", timeout=60000)
             
-            # Wait for page to load completely
-            await asyncio.sleep(5)
-            
-            # Check if we need to login
-            current_url = self.page.url
-            if "login" in current_url or "auth" in current_url:
-                logger.warning("LinkedIn login required! Please log in manually in the browser window.")
-                print("\n" + "=" * 60)
-                print("🔑 LINKEDIN LOGIN REQUIRED")
-                print("=" * 60)
-                print("The browser window has opened to LinkedIn.")
-                print("Please log in manually with your LinkedIn credentials.")
-                print("After logging in, the page will automatically refresh.")
-                print("=" * 60)
-                
-                # Wait for user to login (max 2 minutes)
-                wait_time = 0
                 while ("login" in self.page.url or "auth" in self.page.url) and wait_time < 120:
                     await asyncio.sleep(2)
                     wait_time += 2
