@@ -11,13 +11,7 @@ from contextlib import asynccontextmanager
 load_dotenv()
 
 # Global extractor instance
-extractor = None
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    """Lifespan manager for browser session"""
-    global extractor
-    try:
+extractor = 
         # Startup
         extractor = LinkedInExtractor()
         await extractor.setup_browser()
